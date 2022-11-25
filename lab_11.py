@@ -1,3 +1,6 @@
+# Федченко Анастасия ИУ7-15Б
+# Лабораторная работа №11
+# Сортировка массива
 import random
 import time
 
@@ -8,17 +11,17 @@ def gnome_sort(arr):
     :return: [время сортировки, количество перестановок]
     """
     start_time = time.time()
-    count = 0
+    count = 0  # подсчёт количества перестановок
     i = 1
     while i < len(arr):
-        if i == 0:
+        if i == 0:  # если дошли до левого края массива
             i = 1
-        if arr[i] >= arr[i - 1]:
+        if arr[i] >= arr[i - 1]:  # если элементы стоят в правильном порядке
             i += 1
-        else:
+        else:  # если элементы стоят в неправильном порядке
             arr[i], arr[i - 1] = arr[i - 1], arr[i]
             count += 1
-            i -= 1
+            i -= 1  # шаг назад
     finish_time = time.time()
     return [finish_time - start_time, count]
 
@@ -29,26 +32,31 @@ def calculations_for_table(N):
     :return: [[время сортировки упорядоченного, количество перестановок в упорядоченном],
     [для рандомного], [для массива в обратном порядке]]
     """
-    arr1 = [a for a in range(N)]
-    arr2 = [a for a in range(N)]
+    arr1 = [a for a in range(N)]  # упорядоченный массив
+    arr2 = [a for a in range(N)]  # рандомный массив
     random.shuffle(arr2)
-    arr3 = arr1[::-1]
+    arr3 = arr1[::-1]  # массив в обратном порядке
     return [gnome_sort(arr1), gnome_sort(arr2), gnome_sort(arr3)]
 
 
 # ввод с проверками
 while ValueError:
     try:
-        print("Введите массив, который надо отсортировать (в одну строку через пробел):")
+        print("Введите массив целых чисел, который надо отсортировать (в одну строку через пробел):")
         arr = list(map(int, input().split()))
     except ValueError:
         print("Массив должен состоять из целых чисел.")
-        print("ППопробуйте ещё раз.")
+        print("Попробуйте ещё раз.")
     else:
         break
+
+gnome_sort(arr)  # сортировка массива
+print("Отсортированный массив: ")
+print(*arr)  # вывод отсортированного массива
+
 while ValueError or AssertionError:
     try:
-        N1 = int(input("Введите первую размерность тестового массива: "))
+        N1 = int(input("Введите первую размерность тестового массива (целое число): "))
         assert N1 > 0
     except ValueError:
         print("Размерность массива должна быть равна целому числу.")
@@ -60,7 +68,7 @@ while ValueError or AssertionError:
         break
 while ValueError or AssertionError:
     try:
-        N2 = int(input("Введите вторую размерность тестового массива: "))
+        N2 = int(input("Введите вторую размерность тестового массива (целое число): "))
         assert N2 > 0
     except ValueError:
         print("Размерность массива должна быть равна целому числу.")
@@ -72,7 +80,7 @@ while ValueError or AssertionError:
         break
 while ValueError or AssertionError:
     try:
-        N3 = int(input("Введите третью размерность тестового массива: "))
+        N3 = int(input("Введите третью размерность тестового массива (целое число): "))
         assert N3 > 0
     except ValueError:
         print("Размерность массива должна быть равна целому числу.")
@@ -83,8 +91,6 @@ while ValueError or AssertionError:
     else:
         break
 
-gnome_sort(arr)  # сортировка массива
-print(*arr)  # вывод отсортированного массива
 # вычисление значений нужных для таблицы для каждого из N
 res1 = calculations_for_table(N1)
 res2 = calculations_for_table(N2)
