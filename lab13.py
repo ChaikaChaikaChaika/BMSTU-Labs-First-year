@@ -4,7 +4,7 @@
 import re
 
 
-def is_file_ok(path):  # проверка базы данных на мсоответствие структуре
+def is_file_ok(path):  # проверка базы данных на соответствие структуре
     it_is_ok = True
     file = open(path, 'r')
     for line in file:
@@ -28,7 +28,7 @@ def is_file_ok(path):  # проверка базы данных на мсоот�
 def first():  # Выбрать файл для работы
     while IOError:
         try:
-            print("Введите путь до файла (должен заканчиваться на '.txt'):", end=' ')
+            print("Введите путь до файла (должен заканчиваться на '.txt') или 'exit' для выхода:", end=' ')
             path = input()
             if path == "exit":
                 return None
@@ -112,7 +112,7 @@ def second():  # Инициализировать базу данных (соз�
     while IOError:
         try:
             print("Введите путь до файла, в который будет записана новая база данных "
-                  "(должно заканчиваться на '[имя файла].txt': ", end='')
+                  "(должно заканчиваться на '[имя файла].txt' или 'exit' для выхода: ", end='')
             new_path = input()
             if new_path == "exit":
                 return None
@@ -293,7 +293,7 @@ while working:
     elif N == 4:  # добавить запись в конец бд
         if cur_path is None:
             cur_path = first()
-        if cur_path is  not None:
+        if cur_path is not None:
             cur_file = open(cur_path, 'r')
             res = None
             for line in cur_file:
@@ -317,7 +317,7 @@ while working:
                 res = 0
             cur_file.close()
             cur_file = open(cur_path, 'a')
-            #cur_file.seek(0, 2)
+            # cur_file.seek(0, 2)
             cur_file.write(input_line(res) + '\n')
             cur_file.close()
     elif N == 5:  # поиск по оценке
